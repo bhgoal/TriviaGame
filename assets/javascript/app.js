@@ -32,22 +32,25 @@
 //display stats
   
 var questions = [{
-    actual: "What is question one?",
+    number: 0,
+    actual: "What year was Snapchat first released?? 😊",
     answers: [ 
-        "This is Answer A",
-        "This is Answer B",
-        "This is Answer C",
-        "This is Answer D"],
-    correct: "B"
-},  {
-    actual: "What is question two?",
-    answers: [ 
-        "This is Answer A",
-        "This is Answer B",
-        "This is Answer C",
-        "This is Answer D"],
+        "2008",
+        "2010",
+        "2011",
+        "2012"],
     correct: "C"
 },  {
+    number: 1,
+    actual: "Advertising with a sponsored lense for one day will cost you:",
+    answers: [ 
+        "$10,000",
+        "$50,000",
+        "$100,000",
+        "$400,000"],
+    correct: "D"
+},  {
+    number: 2,
     actual: "What is question three?",
     answers: [ 
         "This is Answer A",
@@ -56,28 +59,31 @@ var questions = [{
         "This is Answer D"],
     correct: "A"
 },  {
-    actual: "What is question four?",
+    number: 3,
+    actual: "As of early 2018, how many daily users are on Snapchat?",
     answers: [ 
-        "This is Answer A",
-        "This is Answer B",
-        "This is Answer C",
-        "This is Answer D"],
-    correct: "D"
+        "10 million",
+        "42 million",
+        "187 million",
+        "350 million"],
+    correct: "C"
 },  {
-    actual: "What is question five?",
+    number: 4,
+    actual: "When was the Memories feature added to the app?",
     answers: [ 
-        "This is Answer A",
-        "This is Answer B",
-        "This is Answer C",
-        "This is Answer D"],
-    correct: "D"
+        "July 2016",
+        "September 2016",
+        "October 2016",
+        "January 2017"],
+    correct: "A"
 },  {
-    actual: "What is question six?",
+    number: 5,
+    actual: "What do you see when you're someone else's Best Friend but they aren't one of yours?",
     answers: [ 
-        "This is Answer A",
-        "This is Answer B",
-        "This is Answer C",
-        "This is Answer D"],
+        "😊",
+        "😬",
+        "😳",
+        "😏"],
     correct: "D"
 }];
 
@@ -96,20 +102,24 @@ function newGame() {
     wrong = 0;
     unanswered = 0;
     $("#quesNumBox").css("visibility", "visible");
-    $(".answerBox").css("visibility", "visible");
-    $("#quesActualBox").css("font-size", "100%");
+    $(".answerBox").show();
+    $("#quesActualBox").css({"font-size":"100%", "max-height":"90px", "display":"flex"});
     loadQuestion();
 }
 newGame();
 
 function loadQuestion() {
-    if (quesNum < 2) {
-        $("#quesNumBox").html(quesNum + 1);
+    if (quesNum < 3) {
+        $("#quesNumBox").html(quesNum + 1 + ".");
         $("#quesActualBox").html(questions[quesNum].actual);
         $("#A").html(questions[quesNum].answers[0]);
         $("#B").html(questions[quesNum].answers[1]);
         $("#C").html(questions[quesNum].answers[2]);
         $("#D").html(questions[quesNum].answers[3]);
+        $(".answerBox").css("font-size", "150%");
+        if (quesNum === 5) {
+            $(".answerBox").css("font-size", "400%");
+        }
         questionTimer();
         userResponse();
     } else {
@@ -123,6 +133,7 @@ function userResponse() {
         event.stopPropagation();
         console.log("answer box clicked");
         var chosenAnswer = $(this).attr("id");
+        $(".answerBox").off("click")
         console.log(chosenAnswer);
         console.log(questions[quesNum].correct);
         if (chosenAnswer == questions[quesNum].correct) {
@@ -146,6 +157,7 @@ function questionTimer() {
             outaTime();
         }
         $("#timerBox").text(quesTimer);
+        $("#timerBox").css("font-size", "320%");
         quesTimer--;
     }
     intervalID = setInterval(time, 1000);
@@ -183,10 +195,10 @@ function outaTime() {
 function results() {
     $("#quesNumBox").css("visibility", "hidden");
     $("#timerBox").css("visibility", "hidden");
-    $(".answerBox").css("visibility", "hidden");
+    $(".answerBox").hide();
     $("#quesActualBox").html("Quiz results: <br>Correct: " + correct + "<br>Incorrect: " + wrong + "<br>Unanswered: " + unanswered + "<br>");
     $("#quesActualBox").addClass("text-center");
-    $("#quesActualBox").css("font-size", "150%");
+    $("#quesActualBox").css({"font-size":"150%", "max-height":"500px", "display":"block"});
     var restartButton = $("<button>");
     restartButton.addClass("btn btn-lg btn-primary mt-4");
     //a.attr("type", "button");
