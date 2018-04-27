@@ -92,12 +92,12 @@ var questions = [{
 
 var colorSources = [{
     number: 0,
-    answerHeader: "red",
+    answerHeader: "#00bcff",
     bgColor: "#b0fff1",
     bgImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Cg fill-rule='evenodd'%3E%3Cg id='charlie-brown' fill='%2300d9a9' fill-opacity='0.5'%3E%3Cpath d='M9.8 12L0 2.2V.8l10 10 10-10v1.4L10.2 12h-.4zm-4 0L0 6.2V4.8L7.2 12H5.8zm8.4 0L20 6.2V4.8L12.8 12h1.4zM9.8 0l.2.2.2-.2h-.4zm-4 0L10 4.2 14.2 0h-1.4L10 2.8 7.2 0H5.8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
 },  {
     number: 1,
-    answerHeader: 3,
+    answerHeader: "#ff0087",
     bgColor: "#856cae",
     bgImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4' fill-rule='nonzero'%3E%3Cpath d='M29 58.58l7.38-7.39A30.95 30.95 0 0 1 29 37.84a30.95 30.95 0 0 1-7.38 13.36l7.37 7.38zm1.4 1.41l.01.01h-2.84l-7.37-7.38A30.95 30.95 0 0 1 6.84 60H0v-1.02a28.9 28.9 0 0 0 18.79-7.78L0 32.41v-4.84L18.78 8.79A28.9 28.9 0 0 0 0 1.02V0h6.84a30.95 30.95 0 0 1 13.35 7.38L27.57 0h2.84l7.39 7.38A30.95 30.95 0 0 1 51.16 0H60v27.58-.01V60h-8.84a30.95 30.95 0 0 1-13.37-7.4L30.4 60zM29 1.41l-7.4 7.38A30.95 30.95 0 0 1 29 22.16 30.95 30.95 0 0 1 36.38 8.8L29 1.4zM58 1A28.9 28.9 0 0 0 39.2 8.8L58 27.58V1.02zm-20.2 9.2A28.9 28.9 0 0 0 30.02 29h26.56L37.8 10.21zM30.02 31a28.9 28.9 0 0 0 7.77 18.79l18.79-18.79H30.02zm9.18 20.2A28.9 28.9 0 0 0 58 59V32.4L39.2 51.19zm-19-1.4a28.9 28.9 0 0 0 7.78-18.8H1.41l18.8 18.8zm7.78-20.8A28.9 28.9 0 0 0 20.2 10.2L1.41 29h26.57z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
 },  {
@@ -156,6 +156,24 @@ var wrong = 0;
 var unanswered = 0;
 //var timeoutID;
 
+function introScreen() {
+    $("body").css("background-color", "#fffa54");
+    $("#quesNumBox").css("visibility", "hidden");
+    $("#timerBox").css("visibility", "hidden");
+    $(".answerBox").hide();
+    $("#quesActualBox").html("<img src='assets/images/snaplogo.png'>");
+    $("#quesActualBox").addClass("text-center");
+    $("#quesActualBox").css({"max-height":"500px", "display":"block", "margin-top":"8em", "padding":"0", "background-color": "#fffa54"});
+    $("#quesActualBox").append("<br><br><h1 style='font-size: 220%;'>Snapchat Trivia Quiz!<h1><h4>Tap to begin!</h4>");
+    $("body").off("click").on("click", function(event) {
+        event.stopPropagation();
+        console.log("intro screen clicked");
+        newGame();
+        $("body").off("click")
+    });
+}
+introScreen();
+
 function newGame() {
     quesNum = 0;
     correct = 0;
@@ -163,10 +181,9 @@ function newGame() {
     unanswered = 0;
     $("#quesNumBox").css("visibility", "visible");
     $(".answerBox").show();
-    $("#quesActualBox").css({"font-size":"100%", "max-height":"90px", "display":"flex"});
+    $("#quesActualBox").css({"font-size":"100%", "max-height":"90px", "display":"flex", "margin-top":".2em", "padding":"2em", "background-color": "#ffffff"});
     loadQuestion();
 }
-newGame();
 
 function colorMe() {
     $("body").css("background-color", colorSources[quesNum].bgColor);
