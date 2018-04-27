@@ -217,7 +217,7 @@ function userResponse() {
         event.stopPropagation();
         console.log("answer box clicked");
         var chosenAnswer = $(this).attr("id");
-        $(".answerBox").off("click")
+        $(".answerBox").off("click");
         console.log(chosenAnswer);
         console.log(questions[quesNum].correct);
         if (chosenAnswer == questions[quesNum].correct) {
@@ -261,7 +261,7 @@ function answeredCorrectly() {
 function answeredWrong() {
     //clearTimeout(timeoutID);
     clearInterval(intervalID);
-    $("#quesActualBox").html("Incorrect! The answer was " + questions[quesNum].correct);
+    $("#quesActualBox").html("Incorrect! The answer was " + questions[quesNum].correct + ".");
     $("#timerBox").css("visibility", "hidden");
     quesNum++;
     wrong++;
@@ -269,7 +269,8 @@ function answeredWrong() {
 }
 
 function outaTime() {
-    $("#quesActualBox").html("Out of time! The answer was " + questions[quesNum].correct);
+    $(".answerBox").off("click");
+    $("#quesActualBox").html("Out of time! The answer was " + questions[quesNum].correct + ".");
     quesNum++;
     unanswered++;
     setTimeout(loadQuestion, 3000);
@@ -288,7 +289,7 @@ function results() {
     //a.attr("type", "button");
     restartButton.text("Restart");
     $("#quesActualBox").append(restartButton);
-    $(".btn-primary").click(newGame);
+    $(".btn-primary").click(introScreen);
 }
 
 function randomQuesAnsw() {
