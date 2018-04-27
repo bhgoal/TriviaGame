@@ -234,7 +234,7 @@ function userResponse() {
 
 function questionTimer() {
     $("#timerBox").css("visibility", "visible");
-    quesTimer = 5;
+    quesTimer = 10;
     time();
     function time() {
         if (quesTimer === 0) {
