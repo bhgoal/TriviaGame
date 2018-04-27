@@ -163,13 +163,13 @@ function introScreen() {
     $(".answerBox").hide();
     $("#quesActualBox").html("<img src='assets/images/snaplogo.png'>");
     $("#quesActualBox").addClass("text-center");
-    $("#quesActualBox").css({"max-height":"500px", "display":"block", "margin-top":"8em", "padding":"0", "background-color": "#fffa54"});
+    $("#quesActualBox").css({"max-height":"500px", "display":"block", "margin-top":"6em", "padding":"0", "background-color": "#fffa54"});
     $("#quesActualBox").append("<br><br><h1 style='font-size: 220%;'>Snapchat Trivia Quiz!<h1><h4>Tap to begin!</h4>");
-    $("body").off("click").on("click", function(event) {
+    $(".container").off("click").on("click", function(event) {
         event.stopPropagation();
         console.log("intro screen clicked");
         newGame();
-        $("body").off("click")
+        $(".container").off("click")
     });
 }
 introScreen();
